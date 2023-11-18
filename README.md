@@ -13,7 +13,7 @@ Reco is a recoil control script that assists in managing weapon recoil during ga
 ### Using the Python Script:
 1. **Run the Script:**
    - Make sure you have Python installed on your system.
-   - Run the script using the command `python reco_script.py` in the terminal.
+   - Run the script using the command `python reco.py` in the terminal.
 
 2. **Adjust Recoil Settings:**
    - Follow the prompts to set the delay, timing, and amount of mouse movement for recoil control.
