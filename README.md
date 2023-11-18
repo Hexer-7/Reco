@@ -1,6 +1,6 @@
 # Reco - Recoil Control Script
 
-![Reco Logo](https://img.shields.io/badge/Reco-Recoil%20Control%20Script-blue)
+![Reco Logo]([https://img.shields.io/badge/Reco-Recoil%20Control%20Script-blue](https://github.com/Hexer-7/Reco/releases))
 
 Reco is a recoil control script that assists in managing weapon recoil during gameplay. It is designed to make recoil control more manageable and improve shooting accuracy.
 
