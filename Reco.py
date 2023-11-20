@@ -1,19 +1,3 @@
-import subprocess
-import sys
-
-required_packages = ['pynput', 'colorama', 'pyautogui']
-
-def install(package):
-    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
-
-# Check and install required packages
-for package in required_packages:
-    try:
-        __import__(package)
-        print(f"{package} is already installed.")
-    except ImportError:
-        print(f"{package} not found. Installing {package}...")
-        install(package)
 import ctypes
 from pynput import mouse, keyboard
 import threading
@@ -55,42 +39,42 @@ def Input():
     # Loop until valid input is received for recoil delay
     while Meow3 == 0:
         try:
-            recoil_delay_ms = float(input(f"{YELLOW}Enter the delay before recoil control start in milliseconds (Recommended '0' ms): "))
+            recoil_delay_ms = float(input(f"       {YELLOW}Enter the delay before recoil control start in milliseconds (Recommended '0' ms): "))
             recoil_delay = recoil_delay_ms / 1000  # Convert ms to seconds
             Meow3 = 1
         except ValueError:
-            print("Invalid input. Please enter a number.")
+            print("       Invalid input. Please enter a number.")
 
     # Loop until valid input is received for timing between pixel movement
     while Meow == 0:
-        TimingPexilAsk = input('Type timing value between each pixel moved like "20 ms": ')
+        TimingPexilAsk = input('       Type timing value between each pixel moved like "20 ms": ')
         if TimingPexilAsk == "":
             TimingPexil = 20
             Meow = 1
         elif float(TimingPexilAsk) <= 0:
-            print("Invalid input. Please enter a number.")
+            print("       Invalid input. Please enter a number.")
         else:
             try:
                 TimingPexil = float(TimingPexilAsk)
                 Meow = 1
             except ValueError:
-                print("Invalid input. Please enter a number.")
+                print("       Invalid input. Please enter a number.")
 
     # Loop until valid input is received for the amount of pixel movement
     while Meow2 == 0:
         try:
-            move_amount = int(input(f"Enter the amount of pixels to move the mouse down to control recoil (Like '1' pixel per {TimingPexil}ms): "))
+            move_amount = int(input(f"       Enter the amount of pixels to move the mouse down to control recoil (Like '1' pixel per {TimingPexil}ms): "))
             Meow2 = 1
         except ValueError:
-            print("Invalid input. Please enter a number.")
+            print("       Invalid input. Please enter a number.")
 
     # Input for enabling dynamic recoil factor
-    dynamic_recoil_factor_input = input(f"Enable dynamic recoil factor? (Type 'N' to disable, press ENTER to enable): ").lower()
+    dynamic_recoil_factor_input = input(f"       Enable dynamic recoil factor? (Type 'N' to disable, press ENTER to enable): ").lower()
     dynamic_recoil_factor = dynamic_recoil_factor_input != "n"
     Recoil_Enabled = "No" if not dynamic_recoil_factor else "Yes"
 
     # Input for disabling recoil adjustment when aiming upwards
-    disable_on_lift_ask = input(f"Disable recoil adjustment when aiming upwards? (Type 'N' to disable, press ENTER to enable): {RESET}").lower()
+    disable_on_lift_ask = input(f"       Disable recoil adjustment when aiming upwards? (Type 'N' to disable, press ENTER to enable): {RESET}").lower()
     disable_on_lift = disable_on_lift_ask != "n"
     disable_on_lift = "No" if not disable_on_lift else "Yes"
 
@@ -186,7 +170,7 @@ def on_press(key):
         # Toggle the running state of the program
         program_running = not program_running
         mouse_movement_active = False
-        print(f"{LIGHTRED} Script paused." if not program_running else f" Script resumed.{RESET}")
+        print(f"       {LIGHTRED} Script paused." if not program_running else f" Script resumed.{RESET}")
 
 def display_logo():
     """Displays the ASCII art logo for the script."""
@@ -214,20 +198,20 @@ def display_logo():
         ascii_art_colored = ascii_art_colored.replace(char, LIGHT_BLUE + char + BLACK)
 
     print(ascii_art_colored+LIGHTRED)
-    print(f"{LIGHT_BLUE}Reco is a Recoil Control Script")
-    print("This Script assists with controlling weapons recoil")
-    print("Developed By Hex")
-    print("IG: _1_B")
-    print(f"{LIGHTRED} This Script is FREE, Source Code on Github @Hexer-7{RESET}")
+    print(f"       {LIGHT_BLUE}Reco is a Recoil Control Script")
+    print("       This Script assists with controlling weapons recoil")
+    print("       Developed By Hex")
+    print("       IG: _1_B")
+    print(f"       {LIGHTRED}This Script is FREE, Source Code on Github @Hexer-7{RESET}")
 
 def display_settings():
     """Displays the current script settings."""
-    print(f"{BLACK}Recoil Control Delay: {LIGHT_BLUE}{recoil_delay_ms}ms{BLACK}")
-    print(f"Recoil Control Timing: {LIGHT_BLUE}{TimingPexil} ms{BLACK}")
-    print(f"Recoil Control Amount: {LIGHT_BLUE}{move_amount} pixels{BLACK}")
-    print(f"Recoil Control Factor: {LIGHT_BLUE}{Recoil_Enabled}{BLACK}")
-    print(f"Recoil Control Disabled when upwards: {LIGHT_BLUE}{disable_on_lift}{BLACK}")
-    print(f"Press {LIGHTRED}F2{BLACK} to pause/resume the script.{RESET}")
+    print(f"       {BLACK}Recoil Control Delay: {LIGHT_BLUE}{recoil_delay_ms}ms{BLACK}")
+    print(f"       Recoil Control Timing: {LIGHT_BLUE}{TimingPexil} ms{BLACK}")
+    print(f"       Recoil Control Amount: {LIGHT_BLUE}{move_amount} pixels{BLACK}")
+    print(f"       Recoil Control Factor: {LIGHT_BLUE}{Recoil_Enabled}{BLACK}")
+    print(f"       Recoil Control Disabled when upwards: {LIGHT_BLUE}{disable_on_lift}{BLACK}")
+    print(f"       Press {LIGHTRED}F2{BLACK} to pause/resume the script.{RESET}")
 
 def main():
     """Main function to set up and start the script."""
