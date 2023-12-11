@@ -1,9 +1,14 @@
+import os
+
+# Install required packages
+os.system('pip install pynput')
+os.system('pip install colorama')
+
 import ctypes
 from pynput import mouse, keyboard
 import threading
 import time
 from colorama import init, Fore
-import os
 
 
 init(convert=True)
