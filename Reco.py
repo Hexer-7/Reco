@@ -4,7 +4,7 @@ import threading
 import time
 from colorama import init, Fore
 import os
-from pyautogui import position as positionPy
+
 
 init(convert=True)
 
@@ -27,6 +27,19 @@ def clear_screen():
         os.system('cls')
     else:  # Unix/Linux/MacOS/BSD/etc
         os.system('clear')
+
+
+def get_cursor_position():
+    """Returns the current xy coordinates of the mouse cursor as a two-integer
+    tuple by calling the GetCursorPos() win32 function.
+
+    Returns:
+      (x, y) tuple of the current xy coordinates of the mouse cursor.
+    """
+
+    cursor = ctypes.wintypes.POINT()
+    ctypes.windll.user32.GetCursorPos(ctypes.byref(cursor))
+    return (cursor.x, cursor.y)
 
 def Input():
     """Handles user input for configuring the recoil control settings."""
@@ -109,7 +122,7 @@ class RecoilManager:
 
     def update_speed(self):
         """Updates the current speed based on the mouse's Y position."""
-        _, y = positionPy()
+        _, y = get_cursor_position()
         y = y - self.last_mouse_y
         if self.disable_on_lift and y < 0:
             # Gradually reduce recoil if the mouse is moving upwards
@@ -126,11 +139,10 @@ class RecoilManager:
 
 # Function to simulate mouse movement
 def move_down():
-
     """Performs the mouse down movement to simulate recoil."""
-    global mouse_movement_active, left_button_pressed, right_button_pressed, dynamic_recoil_factor, disable_on_lift,last_mouse_y
+    global mouse_movement_active, left_button_pressed, right_button_pressed, dynamic_recoil_factor, disable_on_lift, last_mouse_y
     time.sleep(recoil_delay)
-    _,last_mouse_y = positionPy()
+    _, last_mouse_y = get_cursor_position()
     # Set up RecoilManager with dynamic recoil factor
     recoil_manager = RecoilManager(slowdown_factor=1, dynamic_recoil_factor=dynamic_recoil_factor, disable_on_lift=disable_on_lift)  # Slowdown factor will be set inside `update_speed` method
 
@@ -170,7 +182,7 @@ def on_press(key):
         # Toggle the running state of the program
         program_running = not program_running
         mouse_movement_active = False
-        print(f"       {LIGHTRED} Script paused." if not program_running else f" Script resumed.{RESET}")
+        print(f"      {LIGHTRED} Script paused." if not program_running else f"       Script resumed.{RESET}")
 
 def display_logo():
     """Displays the ASCII art logo for the script."""
